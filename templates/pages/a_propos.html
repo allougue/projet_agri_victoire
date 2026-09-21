@@ -1,27 +1,64 @@
 {% extends "base.html" %}
 {% block title %}À propos — AGRI-VICTOIRE{% endblock %}
+
 {% block content %}
 <section class="max-w-5xl mx-auto px-4 py-16">
-<div class="bg-white rounded-3xl border p-8 md:p-12">
-<p class="text-agriculture-600 font-semibold">À propos</p>
-<h1 class="text-4xl font-black mt-2">{{ contenu.nom_site|default:"AGRI-VICTOIRE" }}</h1>
-<p class="text-xl text-gray-500 mt-4">{{ contenu.slogan }}</p>
-<div class="mt-8 prose max-w-none whitespace-pre-line">{{ contenu.texte_a_propos }}</div>
-<div class="mt-10 grid md:grid-cols-2 gap-4 text-gray-600">
-<p>📍 {{ contenu.adresse }}</p><p>📞+229 01 93 78 10 18  {{ contenu.telephone }}</p>
-<p>✉️ Agri-Victoire <br>
-     Est un établissement spécialisé dans la production et la commercialisation des produits agricles bio.
-     Les plats cuisinés à base de nos produits surtout légumes sont conseillés à tous et et surtout aux vieux, femmes enceintes
-     et 
-     
-    
-    {{ contenu.email }}</p>
-</div>
-<div class="mt-8 flex gap-4">
-{% if contenu.facebook %}<a href="{{ contenu.facebook }}" target="_blank" class="text-agriculture-700 font-semibold">Facebook</a>{% endif %}
-{% if contenu.instagram %}<a href="{{ contenu.instagram }}" target="_blank" class="text-agriculture-700 font-semibold">Instagram</a>{% endif %}
-{% if contenu.whatsapp %}<a href="{{ contenu.whatsapp }}" target="_blank" class="text-agriculture-700 font-semibold">WhatsApp</a>{% endif %}
-</div>
-</div>
+  <div class="bg-emerald-50/50 rounded-3xl border border-emerald-200 p-8 md:p-12 shadow-sm">
+    <p class="text-emerald-700 font-bold uppercase tracking-wider text-sm">À propos</p>
+    <h1 class="text-4xl md:text-5xl font-black mt-2 text-emerald-950">{{ contenu.nom_site|default:"AGRI-VICTOIRE" }}</h1>
+    <p class="text-xl text-emerald-800 font-medium mt-3">{{ contenu.slogan|default:"Le frais, le bio et le naturel au cœur de Ouèssè" }}</p>
+
+    <!-- Texte dynamique si renseigné en base de données -->
+    {% if contenu.texte_a_propos %}
+      <div class="mt-8 prose max-w-none whitespace-pre-line text-emerald-900">
+        {{ contenu.texte_a_propos }}
+      </div>
+    {% endif %}
+
+    <!-- Presentation de la plateforme -->
+    <div class="mt-8 space-y-4 text-emerald-900 leading-relaxed border-t border-emerald-200 pt-6">
+      <h2 class="text-2xl font-bold text-emerald-950">Notre engagement pour une alimentation saine</h2>
+
+      <p>
+        <strong class="text-emerald-950 font-bold">Agri-Victoire</strong> est une plateforme dédiée à la promotion des produits agricoles biologiques au Bénin, ancrée au cœur de la commune de Ouèssè dans le département des Collines.
+      </p>
+
+      <p>
+        Notre mission principale est de mettre en avant des <em class="text-emerald-800 font-semibold not-italic">légumes frais de qualité supérieure</em>, cultivés selon des méthodes naturelles et rigoureusement exemptes de produits chimiques, d engrais synthétiques et de pesticides.
+      </p>
+
+      <p>
+        Consommer nos légumes frais et biologiques permet de préserver la santé de toute la famille. Ils apportent les nutriments essentiels indispensables au bon développement des <strong class="text-emerald-900 bg-emerald-100/80 px-1.5 py-0.5 rounded">enfants</strong>, au maintien de la vitalité des <strong class="text-emerald-900 bg-emerald-100/80 px-1.5 py-0.5 rounded">personnes âgées</strong>, ainsi qu à l accompagnement nutritionnel des <strong class="text-emerald-900 bg-emerald-100/80 px-1.5 py-0.5 rounded">femmes enceintes et des mères allaitantes</strong>.
+      </p>
+
+      <p>
+        À travers Agri-Victoire, nous valorisons le savoir-faire agricole de Ouèssè en offrant une visibilité méritée aux produits frais, sains et bio de notre région.
+      </p>
+    </div>
+
+    <!-- Coordonnees et contact -->
+    <div class="mt-10 grid md:grid-cols-2 gap-4 text-emerald-800 border-t border-emerald-200 pt-6 font-medium">
+      <p class="flex items-center gap-2">📍 Ouèssè, Département des Collines, Bénin {% if contenu.adresse %}- {{ contenu.adresse }}{% endif %}</p>
+      <p class="flex items-center gap-2">📞 +229 01 93 78 10 18 {% if contenu.telephone %}- {{ contenu.telephone }}{% endif %}</p>
+      {% if contenu.email %}<p class="flex items-center gap-2">✉️ {{ contenu.email }}</p>{% endif %}
+    </div>
+
+    <!-- Réseaux sociaux -->
+    <div class="mt-8 flex gap-4">
+      {% if contenu.facebook %}
+        <a href="{{ contenu.facebook }}" target="_blank" class="bg-emerald-700 hover:bg-emerald-800 text-white font-semibold px-4 py-2 rounded-xl transition">Facebook</a>
+      {% endif %}
+
+      {% if contenu.instagram %}
+        <a href="{{ contenu.instagram }}" target="_blank" class="bg-emerald-700 hover:bg-emerald-800 text-white font-semibold px-4 py-2 rounded-xl transition">Instagram</a>
+      {% endif %}
+
+      {% if contenu.whatsapp %}
+        <a href="{{ contenu.whatsapp }}" target="_blank" class="bg-emerald-700 hover:bg-emerald-800 text-white font-semibold px-4 py-2 rounded-xl transition">WhatsApp</a>
+      {% endif %}
+    </div>
+  </div>
 </section>
 {% endblock %}
+
+
