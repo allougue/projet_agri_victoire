@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Mon profil — AGRI-VICTOIRE{% endblock %}
+{% block content %}
+<section class="max-w-xl mx-auto px-4 py-16">
+  <h1 class="text-3xl font-black">Mon profil</h1>
+  <form method="post" enctype="multipart/form-data" class="mt-8 bg-white rounded-2xl p-7 border shadow-sm space-y-5">
+    {% csrf_token %}
+
+    <!-- Champ Photo de profil -->
+    <div>
+      <label class="block font-medium mb-2">Photo de profil</label>
+      <div class="flex items-center space-y-0 space-x-4">
+        {% if user.profile.photo %}
+          <img src="{{ user.profile.photo.url }}" alt="Photo de profil" class="w-16 h-16 rounded-full object-cover border">
+        {% else %}
+          <div class="w-16 h-16 rounded-full bg-gray-100 border flex items-center justify-center text-gray-400 font-bold">
+            Avatar
+          </div>
+        {% endif %}
+        <input name="photo" type="file" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-agriculture-50 file:text-agriculture-700 hover:file:bg-agriculture-100">
+      </div>
+    </div>
+
+    <label class="block font-medium">Prénom
+      <input name="first_name" type="text" value="{{ user.first_name }}" class="mt-2 w-full border rounded-xl p-3" required>
+    </label>
+
+    <label class="block font-medium">Nom
+      <input name="last_name" type="text" value="{{ user.last_name }}" class="mt-2 w-full border rounded-xl p-3" required>
+    </label>
+
+    <label class="block font-medium">E-mail
+      <input name="email" type="email" value="{{ user.email }}" class="mt-2 w-full border rounded-xl p-3" required>
+    </label>
+
+    <label class="block font-medium">Téléphone
+      <input name="telephone" type="text" value="{{ user.profile.telephone }}" class="mt-2 w-full border rounded-xl p-3" required>
+    </label>
+
+    <label class="block font-medium">Adresse
+      <input name="adresse" type="text" value="{{ user.profile.adresse }}" class="mt-2 w-full border rounded-xl p-3" required>
+    </label>
+
+    <label class="block font-medium">Ville
+      <input name="ville" type="text" value="{{ user.profile.ville }}" class="mt-2 w-full border rounded-xl p-3" required>
+    </label>
+
+    <button class="w-full rounded-xl bg-agriculture-600 text-white py-3 font-bold">Enregistrer</button>
+  </form>
+</section>
+{% endblock %}

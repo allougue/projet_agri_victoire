@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Connexion — AGRI-VICTOIRE{% endblock %}
+{% block content %}
+<section class="max-w-xl mx-auto px-4 py-16">
+<h1 class="text-3xl font-black">Connexion</h1>
+<form method="post" enctype="multipart/form-data" class="mt-8 bg-white rounded-2xl p-7 border shadow-sm space-y-5">
+{% csrf_token %}<label class="font-medium">Nom d'utilisateur<input name="username" type="text" class="mt-2 w-full border rounded-xl p-3" required></label><label class="font-medium">Mot de passe<input name="password" type="password" class="mt-2 w-full border rounded-xl p-3" required></label>
+<button class="w-full rounded-xl bg-agriculture-600 text-white py-3 font-bold">Se connecter</button>
+{{ form.as_p }}
+    <button type="submit" class="w-full mt-4 bg-agriculture-600 text-white py-2 rounded-xl font-bold">Se connecter</button>
+  </form>
+</section>
+{% endblock %}

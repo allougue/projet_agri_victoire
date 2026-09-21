@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ produit.nom }} — AGRI-VICTOIRE{% endblock %}
+{% block content %}
+<section class="max-w-6xl mx-auto px-4 py-14 grid md:grid-cols-2 gap-10">
+ <img src="{{ produit.image_principale.url }}" class="w-full h-[460px] object-cover rounded-3xl" alt="{{ produit.nom }}">
+ <div class="flex flex-col justify-center">
+  <p class="text-agriculture-600 font-semibold">{{ produit.categorie.nom }}</p>
+  <h1 class="text-4xl font-black mt-2">{{ produit.nom }}</h1>
+  <p class="text-gray-600 mt-5 leading-7">{{ produit.description }}</p>
+  <div class="mt-7 text-3xl font-black text-agriculture-700">{{ produit.prix }} FCFA <span class="text-base font-normal text-gray-400">/ {{ produit.unite }}</span></div>
+  <p class="mt-3 text-sm">Stock disponible : <strong>{{ produit.stock }}</strong></p>
+  <a href="{% url 'ajouter_au_panier' produit.id %}" class="mt-8 inline-flex justify-center rounded-xl bg-agriculture-600 text-white px-6 py-4 font-bold">Ajouter au panier</a>
+ </div>
+</section>
+<section class="max-w-6xl mx-auto px-4 pb-16">
+ <div class="bg-white rounded-2xl p-7 border">
+  <h2 class="text-2xl font-bold">Laisser un avis</h2>
+  {% if user.is_authenticated %}
+  <form method="post" action="{% url 'ajouter_avis' produit.id %}" class="mt-5 grid gap-4">
+   {% csrf_token %}
+   <select name="note" class="border rounded-xl p-3">{% for i in "12345" %}<option value="{{ i }}">{{ i }} / 5</option>{% endfor %}</select>
+   <textarea name="commentaire" rows="4" class="border rounded-xl p-3" placeholder="Votre commentaire"></textarea>
+   <button class="rounded-xl bg-agriculture-600 text-white py-3 font-semibold">Publier mon avis</button>
+  </form>
+  {% else %}<p class="text-gray-500 mt-3">Connectez-vous pour laisser un avis.</p>{% endif %}
+ </div>
+</section>
+{% endblock %}

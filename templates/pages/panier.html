@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="max-w-5xl mx-auto px-4 py-14">
+<h1 class="text-3xl font-black">Mon panier</h1>
+<div class="mt-8 bg-white border rounded-2xl overflow-hidden">
+{% for ligne in panier.lignes.all %}
+<div class="p-5 border-b flex items-center gap-4">
+<img src="{{ ligne.produit.image_principale.url }}" class="w-20 h-20 rounded-xl object-cover">
+<div class="flex-1"><h2 class="font-bold">{{ ligne.produit.nom }}</h2><p>{{ ligne.produit.prix }} FCFA / {{ ligne.produit.unite }}</p></div>
+<form method="post" action="{% url 'modifier_ligne' ligne.id %}" class="flex gap-2">{% csrf_token %}<input name="quantite" type="number" min="1" value="{{ ligne.quantite }}" class="w-20 border rounded-lg p-2"><button class="px-3 rounded-lg border">OK</button></form>
+<a href="{% url 'supprimer_ligne' ligne.id %}" class="text-red-600">Supprimer</a>
+<strong>{{ ligne.sous_total }} FCFA</strong>
+</div>
+{% empty %}<div class="p-12 text-center text-gray-500">Votre panier est vide.</div>{% endfor %}
+</div>
+{% if panier.lignes.all %}
+<div class="mt-6 flex items-center justify-between bg-agriculture-50 rounded-2xl p-6"><strong class="text-xl">Total : {{ panier.total }} FCFA</strong><form method="post" action="{% url 'passer_commande' %}">{% csrf_token %}<button class="rounded-xl bg-agriculture-600 text-white px-6 py-3 font-bold">Passer la commande</button></form></div>
+{% endif %}
+<p class="text-sm text-gray-500 mt-4">Aucun paiement en ligne n'est effectué sur la plateforme.</p>
+</section>
+{% endblock %}

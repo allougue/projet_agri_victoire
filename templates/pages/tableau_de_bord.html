@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="max-w-7xl mx-auto px-4 py-14">
+<h1 class="text-3xl font-black">Tableau de bord</h1>
+<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-8">
+<div class="bg-white border rounded-2xl p-6"><p class="text-gray-500">Produits</p><strong class="text-3xl">{{ nombre_produits }}</strong></div>
+<div class="bg-white border rounded-2xl p-6"><p class="text-gray-500">Commandes</p><strong class="text-3xl">{{ nombre_commandes }}</strong></div>
+<div class="bg-white border rounded-2xl p-6"><p class="text-gray-500">Stock</p><strong class="text-3xl">{{ stock_total }}</strong></div>
+<div class="bg-agriculture-600 text-white rounded-2xl p-6"><p class="text-white/70">Ventes</p><strong class="text-3xl">{{ ventes }} FCFA</strong></div>
+</div>
+<div class="mt-8 bg-white border rounded-2xl p-6">
+<h2 class="text-xl font-bold">Dernières commandes</h2>
+<div class="mt-4 space-y-3">{% for c in commandes %}<div class="flex justify-between border-b pb-3"><span>#{{ c.id }} — {{ c.client.username }}</span><strong>{{ c.total }} FCFA</strong></div>{% empty %}<p class="text-gray-500">Aucune commande.</p>{% endfor %}</div>
+</div>
+</section>
+{% endblock %}

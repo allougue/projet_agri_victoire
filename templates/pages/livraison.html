@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Informations de livraison — AGRI-VICTOIRE{% endblock %}
+{% block content %}
+<section class="max-w-xl mx-auto px-4 py-16">
+<h1 class="text-3xl font-black">Informations de livraison</h1>
+<form method="post" enctype="multipart/form-data" class="mt-8 bg-white rounded-2xl p-7 border shadow-sm space-y-5">
+{% csrf_token %}<label class="font-medium">Nom complet<input name="nom_complet" type="text" class="mt-2 w-full border rounded-xl p-3" required></label><label class="font-medium">Téléphone<input name="telephone" type="text" class="mt-2 w-full border rounded-xl p-3" required></label><label class="font-medium">Adresse<input name="adresse" type="text" class="mt-2 w-full border rounded-xl p-3" required></label><label class="font-medium">Ville<input name="ville" type="text" class="mt-2 w-full border rounded-xl p-3" required></label><label class="font-medium">Quartier<input name="quartier" type="text" class="mt-2 w-full border rounded-xl p-3" required></label><label class="font-medium">Indications supplémentaires<textarea name="indications" rows="4" class="mt-2 w-full border rounded-xl p-3" required></textarea></label>
+<button class="w-full rounded-xl bg-agriculture-600 text-white py-3 font-bold">Enregistrer les informations</button>
+</form>
+</section>
+{% endblock %}

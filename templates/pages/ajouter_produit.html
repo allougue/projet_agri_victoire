@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Publier un produit — AGRI-VICTOIRE{% endblock %}
+{% block content %}
+<section class="max-w-3xl mx-auto px-4 py-14">
+<h1 class="text-3xl font-black">Publier un produit</h1>
+<p class="text-gray-500 mt-2">Seul le compte producteur autorisé peut accéder à cette page.</p>
+<form method="post" enctype="multipart/form-data" class="mt-8 bg-white rounded-2xl border p-7 space-y-5">
+{% csrf_token %}
+<div class="grid md:grid-cols-2 gap-5">
+<label>Nom<input name="nom" class="mt-2 w-full border rounded-xl p-3" required></label>
+<label>Catégorie<select name="categorie" class="mt-2 w-full border rounded-xl p-3" required>{% for c in categories %}<option value="{{ c.id }}">{{ c.nom }}</option>{% endfor %}</select></label>
+<label>Prix<input name="prix" type="number" step="0.01" class="mt-2 w-full border rounded-xl p-3" required></label>
+<label>Unité<input name="unite" value="kg" class="mt-2 w-full border rounded-xl p-3" required></label>
+<label>Stock<input name="stock" type="number" min="0" class="mt-2 w-full border rounded-xl p-3" required></label>
+<label>Date de récolte<input name="date_recolte" type="date" class="mt-2 w-full border rounded-xl p-3"></label>
+</div>
+<label class="block">Description<textarea name="description" rows="5" class="mt-2 w-full border rounded-xl p-3" required></textarea></label>
+<label class="block">Image principale<input name="image_principale" type="file" accept="image/*" class="mt-2 w-full border rounded-xl p-3" required></label>
+<label class="flex items-center gap-2"><input name="disponible" type="checkbox" checked> Produit disponible</label>
+<button class="w-full rounded-xl bg-agriculture-600 text-white py-3 font-bold">Publier le produit</button>
+</form>
+</section>
+{% endblock %}

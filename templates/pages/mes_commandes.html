@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="max-w-6xl mx-auto px-4 py-14">
+<h1 class="text-3xl font-black">Mes commandes</h1>
+<div class="mt-8 space-y-5">
+{% for commande in commandes %}
+<div class="bg-white border rounded-2xl p-6">
+<div class="flex flex-wrap justify-between gap-3"><h2 class="font-bold">Commande #{{ commande.id }}</h2><span class="rounded-full bg-agriculture-50 text-agriculture-700 px-3 py-1">{{ commande.get_statut_display }}</span></div>
+<p class="text-gray-500 mt-2">{{ commande.date_commande }} — <strong>{{ commande.total }} FCFA</strong></p>
+<div class="mt-4">{% for ligne in commande.lignes.all %}<p>{{ ligne.produit.nom }} × {{ ligne.quantite }}</p>{% endfor %}</div>
+<a href="{% url 'informations_livraison' commande.id %}" class="inline-block mt-5 text-agriculture-700 font-semibold">Informations de livraison →</a>
+</div>
+{% empty %}<p class="text-gray-500">Aucune commande.</p>{% endfor %}
+</div></section>
+{% endblock %}
